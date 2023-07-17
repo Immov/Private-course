@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/css/styles.css" />
+		<title><%= subject %></title>
+	</head>
+	<body>
+		<header><%- include('partials/_nav') %></header>
+		<main>
+			<div class="form">
+				<h1>Edit Profile</h1>
+				<% if (typeof warningMessage !== 'undefined') { %>
+				<p class="sign-error"><%= warningMessage %></p>
+				<% } %>
+				<form action="profile" method="post" enctype="multipart/form-data">
+					<div class="form-input">
+						<label for="profilePicture">Profile Picture:</label>
+						<input
+							type="file"
+							id="profilePicture"
+							name="profilePicture"
+							accept="image/*" />
+					</div>
+
+					<div class="form-input">
+						<label for="userRole">User Role:</label>
+						<select id="userRole" name="userRole">
+							<option value="Student">Student</option>
+							<option value="Teacher">Teacher</option>
+						</select>
+					</div>
+
+					<button type="submit">Edit</button>
+				</form>
+			</div>
+		</main>
+		<footer><%- include('partials/_footer') %></footer>
+	</body>
+</html>

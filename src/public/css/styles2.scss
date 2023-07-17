@@ -1,0 +1,56 @@
+.body {
+	margin: 0px;
+	padding: 0;
+}
+
+.navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: darkblue;
+	padding: 10px;
+	margin: 0;
+}
+
+.logo {
+	background-color: #ff0000;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.logo a {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+ul {
+	display: flex;
+	justify-content: center;
+}
+
+li {
+	display: inline;
+	background-color: #008000;
+	border-radius: 10px;
+	margin: 0 5px;
+	padding: 5px;
+}
+
+li a {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.sign-btn {
+	display: flex;
+	align-items: center;
+}
+
+.sign-btn a {
+	background-color: #0000ff;
+	border-radius: 10px;
+	color: #ffffff;
+	text-decoration: none;
+	padding: 5px 10px;
+	margin-left: 10px;
+}

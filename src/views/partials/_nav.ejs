@@ -1,0 +1,23 @@
+<nav class="navbar">
+	<div class="logo">
+		<a href="/">Private Course</a>
+	</div>
+	<div>
+		<ul>
+			<li><a class="nav-links" href="#">One</a></li>
+			<li><a class="nav-links" href="#">Two</a></li>
+			<li><a class="nav-links" href="#">Three</a></li>
+			<li><a class="nav-links" href="#">Four</a></li>
+			<li><a class="nav-links" href="#">Five</a></li>
+		</ul>
+	</div>
+	<div class="sign-btn">
+		<% if (typeof loggedIn !== "undefined"){ %> <% if(loggedIn){ %>
+		<a href="/user/profile" class="profile"></a>
+		<a class="sign-out" href="/user/signout">Logout</a>
+		<%}%> <% } else { %>
+		<a class="sign-in" href="/user/signin">Sign-in</a>
+		<a class="sign-up" href="/user/signup">Sign-up</a>
+		<% } %>
+	</div>
+</nav>
