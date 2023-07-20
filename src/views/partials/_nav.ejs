@@ -13,8 +13,10 @@
 	</div>
 	<div class="sign-btn">
 		<% if (typeof loggedIn !== "undefined"){ %> <% if(loggedIn){ %>
-		<a href="/user/profile" class="profile"></a>
-		<a class="sign-out" href="/user/signout">Logout</a>
+		<a href="/user/profile" class="profile"
+			><img src="<%=image%>" alt=""
+		/></a>
+		<a class="sign-out" href="/user/signout">Sign-out</a>
 		<%}%> <% } else { %>
 		<a class="sign-in" href="/user/signin">Sign-in</a>
 		<a class="sign-up" href="/user/signup">Sign-up</a>

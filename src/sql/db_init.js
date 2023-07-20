@@ -1,5 +1,7 @@
 const query = require("./queries");
 
+// COMMAND: node .\src\sql\db_init.js
+
 function create_all_tables() {
 	query.create_user_account_table();
 	query.create_admin_account_table();

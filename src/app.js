@@ -1,11 +1,15 @@
 const express = require("express");
 const session = require("express-session");
 const path = require("path");
-const bodyParser = require("body-parser");
 const multer = require("multer");
+const bodyParser = require("body-parser");
 const favicon = require("serve-favicon");
 const cookieParser = require("cookie-parser");
+const { sessionCheck } = require("./utils/sessionCheck");
 require("dotenv").config();
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 const app = express();
 const store = new session.MemoryStore();
@@ -37,7 +41,7 @@ app.use(
 );
 
 app.use((req, res, next) => {
-	// console.log("Cookies", req.cookies);
+	// console.log("[COOKIES]", req.cookies);
 	console.log(`[${req.method}] - [${req.url}]`);
 	next();
 });
@@ -53,15 +57,24 @@ app.use("/teacher", teacherRouter);
 app.use("/api", apiRouter);
 
 app.get("/", (req, res) => {
-	res.render("home", {
-		subject: "Private Course",
-	});
+	if (req.cookies.authenticated) {
+		res.render("home", {
+			subject: "Private Course",
+			loggedIn: true,
+			image: req.cookies.image,
+		});
+	} else {
+		res.render("home", {
+			subject: "Private Course",
+		});
+	}
 });
 
-app.get("/dashboard", (req, res) => {
+app.get("/dashboard", sessionCheck, (req, res) => {
 	res.render("dashboard", {
 		subject: "Dashboard",
 		loggedIn: true,
+		image: req.cookies.image,
 	});
 });
 

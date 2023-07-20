@@ -7,21 +7,26 @@
 		<title><%= subject %></title>
 	</head>
 	<body>
-		<header><%- include('partials/_nav') %></header>
+		<header><%- include('../partials/_nav') %></header>
 		<main>
 			<div class="form">
 				<h1>Edit Profile</h1>
 				<% if (typeof warningMessage !== 'undefined') { %>
 				<p class="sign-error"><%= warningMessage %></p>
 				<% } %>
-				<form action="profile" method="post" enctype="multipart/form-data">
+				<form
+					action="profile"
+					method="post"
+					enctype="multipart/form-data"
+				>
 					<div class="form-input">
 						<label for="profilePicture">Profile Picture:</label>
 						<input
 							type="file"
 							id="profilePicture"
 							name="profilePicture"
-							accept="image/*" />
+							accept="image/*"
+						/>
 					</div>
 
 					<div class="form-input">
@@ -36,6 +41,6 @@
 				</form>
 			</div>
 		</main>
-		<footer><%- include('partials/_footer') %></footer>
+		<footer><%- include('../partials/_footer') %></footer>
 	</body>
 </html>

@@ -1,3 +1,4 @@
+const { resolveInclude } = require("ejs");
 const mysql = require("mysql");
 require("dotenv").config();
 
@@ -21,18 +22,35 @@ function executeQuery(query, callback) {
 	});
 }
 
-function insertQuery(table, columns, values) {
+function insertQuery(table, columns, values, callback) {
 	let query = `INSERT INTO ${table} ${columns} VALUES ?`;
-	con.query(query, [values], function (err, result) {
+	con.query(query, [values], function (err, res) {
 		if (err) throw err;
+		if (callback) callback(res);
 	});
 }
 
 function selectQuery(table, columns, condition, callback) {
 	let query = `SELECT ${columns} FROM ${table} WHERE ${condition}`;
-	con.query(query, function (err, result) {
+	con.query(query, function (err, res) {
 		if (err) throw err;
-		callback(result);
+		callback(res);
+	});
+}
+
+function updateQuery(table, columnsAndValues, condition, callback) {
+	let query = `UPDATE ${table} SET ${columnsAndValues} WHERE ${condition}`;
+	con.query(query, function (err, res) {
+		if (err) throw err;
+		if (callback) callback(res);
+	});
+}
+
+function deleteQUery(table, condition, callback) {
+	let query = `DELETE FROM ${table} WHERE ${condition}`;
+	con.query(query, function (err, res) {
+		if (err) throw err;
+		if (callback) callback(res);
 	});
 }
 
@@ -45,7 +63,7 @@ function create_user_account_table() {
 		username VARCHAR(50) NOT NULL,
 		password VARCHAR(255) NOT NULL,
 		phone_number VARCHAR(20) NOT NULL,
-		profile_picture BLOB DEFAULT NULL
+		profile_picture varchar(100) DEFAULT NULL
 	);`;
 	executeQuery(query);
 }
@@ -89,8 +107,8 @@ function create_student_account_table() {
 	let query = `
 	CREATE TABLE IF NOT EXISTS student_account (
 		student_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-		user_id INT,
-		level VARCHAR(30) NOT NULL,
+		user_id INT NOT NULL,
+		level VARCHAR(30) DEFAULT NULL,
 		FOREIGN KEY (user_id) REFERENCES user_account(user_id)
 	);`;
 	executeQuery(query);
@@ -185,4 +203,6 @@ module.exports = {
 	executeQuery,
 	insertQuery,
 	selectQuery,
+	updateQuery,
+	deleteQUery,
 };

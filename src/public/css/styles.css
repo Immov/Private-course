@@ -86,7 +86,11 @@ body {
   border-radius: 50px;
   margin: 0;
   margin-right: 5px;
-  background-color: #c8c3ca;
+}
+.navbar .sign-btn .profile img {
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
 }
 .navbar .sign-btn .sign-in:hover {
   background-color: #2b3240;
