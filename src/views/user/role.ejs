@@ -10,26 +10,20 @@
 		<header><%- include('../partials/_nav') %></header>
 		<main>
 			<div class="form">
-				<h1>Edit Profile Picture</h1>
+				<h1>Change Role</h1>
 				<% if (typeof warningMessage !== 'undefined') { %>
 				<p class="sign-error"><%= warningMessage %></p>
 				<% } %>
-				<form
-					action="profile"
-					method="post"
-					enctype="multipart/form-data"
-				>
+				<form action="role" method="post">
 					<div class="form-input">
-						<label for="profilePicture">Profile Picture:</label>
-						<input
-							type="file"
-							id="profilePicture"
-							name="profilePicture"
-							accept="image/*"
-						/>
+						<label for="userRole">User Role:</label>
+						<select id="userRole" name="userRole">
+							<option value="Student">Student</option>
+							<option value="Teacher">Teacher</option>
+						</select>
 					</div>
 
-					<button type="submit">Edit</button>
+					<button type="submit">Edit Role</button>
 				</form>
 			</div>
 		</main>

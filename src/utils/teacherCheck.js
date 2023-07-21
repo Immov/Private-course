@@ -1,5 +1,5 @@
-function sessionCheck(req, res, next) {
-	if (req.cookies.authenticated) {
+function teacherCheck(req, res, next) {
+	if (req.cookies.role === "Teacher") {
 		console.log("[COOKIES]", req.cookies);
 		// console.log("[SESSION]", req.session);
 		next();
@@ -9,5 +9,5 @@ function sessionCheck(req, res, next) {
 }
 
 module.exports = {
-	sessionCheck,
+	teacherCheck,
 };

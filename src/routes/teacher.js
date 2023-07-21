@@ -1,27 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const bodyParser = require("body-parser");
 
-router.use(bodyParser.json());
-
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
 	res.render("teacher/home", {
-		subject: "Teacher: Home",
+		subject: "Student: Home",
+		loggedIn: true,
+		image: req.cookies.image,
+		role: req.cookies.role,
 	});
 });
 
-router.post("/signup", (req, res) => {
-	const data = req.body;
-	console.log(data);
-	res.render("teacher/home", {
-		subject: `Welcome: ${data.name}`,
-		t_name: `${data.name}`,
-	});
-});
-
-router.get("/signup", (req, res) => {
-	res.render("teacher/signUp", {
-		subject: "Teacher: Sign Up",
+router.get("/dashboard", async (req, res) => {
+	res.render("teacher/dashboard", {
+		subject: "Student: Dashboard",
+		loggedIn: true,
+		image: req.cookies.image,
+		role: req.cookies.role,
 	});
 });
 

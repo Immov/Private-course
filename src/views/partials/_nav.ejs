@@ -12,12 +12,18 @@
 		</ul>
 	</div>
 	<div class="sign-btn">
-		<% if (typeof loggedIn !== "undefined"){ %> <% if(loggedIn){ %>
-		<a href="/user/profile" class="profile"
-			><img src="<%=image%>" alt=""
-		/></a>
+		<% if (typeof loggedIn !== "undefined" && loggedIn){ %> <% if (role ===
+		"Unassigned") { %>
+		<a href="/user/role" class="role"><%=role%></a>
+		<% } else { %>
+		<a href="/dashboard" class="role"><%=role%></a>
+		<%}%>
+		<a href="/user/profile" class="profile">
+			<img src="<%=image%>" alt="" />
+		</a>
 		<a class="sign-out" href="/user/signout">Sign-out</a>
-		<%}%> <% } else { %>
+
+		<% } else { %>
 		<a class="sign-in" href="/user/signin">Sign-in</a>
 		<a class="sign-up" href="/user/signup">Sign-up</a>
 		<% } %>

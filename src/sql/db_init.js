@@ -30,8 +30,8 @@ function drop_all() {
 	query.dropTables(tables);
 }
 
+drop_all();
 create_all_tables();
-// drop_all();
 // query.showTables();
 
 // query.insertCourses();

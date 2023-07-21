@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const favicon = require("serve-favicon");
 const cookieParser = require("cookie-parser");
 const { sessionCheck } = require("./utils/sessionCheck");
+const { studentCheck } = require("./utils/studentCheck");
+const { teacherCheck } = require("./utils/teacherCheck");
 require("dotenv").config();
 
 const storage = multer.memoryStorage();
@@ -52,8 +54,8 @@ const teacherRouter = require("./routes/teacher");
 const apiRouter = require("./routes/api");
 
 app.use("/user", userRouter);
-app.use("/student", studentRouter);
-app.use("/teacher", teacherRouter);
+app.use("/Student", sessionCheck, studentCheck, studentRouter);
+app.use("/Teacher", sessionCheck, teacherCheck, teacherRouter);
 app.use("/api", apiRouter);
 
 app.get("/", (req, res) => {
@@ -62,6 +64,7 @@ app.get("/", (req, res) => {
 			subject: "Private Course",
 			loggedIn: true,
 			image: req.cookies.image,
+			role: req.cookies.role,
 		});
 	} else {
 		res.render("home", {
@@ -70,12 +73,18 @@ app.get("/", (req, res) => {
 	}
 });
 
-app.get("/dashboard", sessionCheck, (req, res) => {
-	res.render("dashboard", {
-		subject: "Dashboard",
-		loggedIn: true,
-		image: req.cookies.image,
-	});
+app.get("/dashboard", sessionCheck, async (req, res) => {
+	if (req.cookies.role !== "Unassigned") {
+		console.log(req.cookies.role);
+		res.redirect(`/${req.cookies.role}/dashboard`);
+	} else {
+		res.render("dashboard", {
+			subject: "Dashboard",
+			loggedIn: true,
+			image: req.cookies.image,
+			role: req.cookies.role,
+		});
+	}
 });
 
 app.get("*", (req, res) => {
